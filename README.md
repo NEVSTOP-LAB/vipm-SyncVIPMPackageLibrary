@@ -1,6 +1,6 @@
 # vipm-SyncVIPMPackageLibrary
 
-use [lvcicd:BuildDailyVIP](https://github.com/LV-APT/lvCICD/blob/main/docs/Operation-List.md#vipm_buildvipackage--build-vipm-library) to sync vipm repo over network.
+use [lvcicd:vipm_syncvipmpackagelibrary](https://github.com/LV-APT/lvCICD/blob/main/docs/Operation-List.md#vipm_syncvipmpackagelibrary-sync-vipm-package-over-network) to sync vipm repo over network.
 
 How to Use it:
 
