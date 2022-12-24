@@ -1,0 +1,57 @@
+name: "vipm-BuildViPackage"
+author: "NEVSTOP"
+description: "CICD Action for build VIPM package file"
+branding:
+  icon: "anchor"
+  color: "green"
+
+inputs:
+  LabVIEW_Version:
+    description: "LabVIEW Version Used"
+    required: false
+    default: "2019"
+  Architecture:
+    description: "32bit/64bit Version of LabVIEW Used"
+    required: false
+    default: "x86"
+  VipbPath:
+    description: "vipb File Path, if it's a folder, use the first matched vipb file to build."
+    required: false
+    default: ""
+  Install:
+    description: "YES/NO, NO as default"
+    required: false
+    default: "NO"
+
+outputs:
+  vipPathName:
+    description: "Full Path of vip file built"
+    value: ${{ steps.build-vip.outputs.Result }}
+  vipPath:
+    description: "Folder of vip file built"
+    value: ${{ steps.vip-name.outputs.vipPath }}
+  vipName:
+    description: "File name of vip file built"
+    value: ${{ steps.vip-name.outputs.vipName }}
+
+runs:
+  using: "composite"
+
+  steps:
+    - id: build-vip
+      uses: LV-APT/lvCICD@main
+      with:
+        LabVIEW_Version: ${{ inputs.LabVIEW_Version }}
+        Architecture: ${{ inputs.Architecture }}
+        Operation: vipm_BuildDailyVIP
+        Parameter1: ${{ inputs.VipbPath }}
+        Parameter2: ${{ inputs.Install }}
+
+    - id: vip-name
+      run: |
+        $vipPath=Split-Path -Path ${{ steps.build-vip.outputs.Result }} -Parent;
+        Write-Host "::set-output name=vipPath::"$vipPath""
+        $vipName=Split-Path -Path ${{ steps.build-vip.outputs.Result }} -Leaf;
+        Write-Host "::set-output name=vipName::"$vipName""
+      shell: powershell
+
