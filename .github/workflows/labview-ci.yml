@@ -36,6 +36,6 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - id: SyncVIPMPackageLibrary
-        uses: NEVSTOP-LAB/vipm-SyncVIPMPackageLibrary@main
+        uses: ./
         with:
           LabVIEW_Version: 2017
