@@ -20,7 +20,7 @@ runs:
 
   steps:
     - id: build-vip
-      uses: LV-APT/lvCICD@main
+      uses: NEVSTOP-LAB/lvCICD@main
       with:
         LabVIEW_Version: ${{ inputs.LabVIEW_Version }}
         Architecture: ${{ inputs.Architecture }}
